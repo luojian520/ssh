@@ -1,7 +1,7 @@
 package ssh
 
 import (
-	"bytes"
+	//"bytes"
 	"errors"
 	"fmt"
 	"net"
@@ -128,7 +128,8 @@ type session struct {
 }
 
 func (sess *session) Write(p []byte) (n int, err error) {
-	if sess.pty != nil {
+	// If change the \n to \r\n, then zmodem(rzsz) will be error
+	/*if sess.pty != nil {
 		m := len(p)
 		// normalize \n to \r\n when pty is accepted.
 		// this is a hardcoded shortcut since we don't support terminal modes.
@@ -139,7 +140,7 @@ func (sess *session) Write(p []byte) (n int, err error) {
 			n = m
 		}
 		return
-	}
+	}*/
 	return sess.Channel.Write(p)
 }
 
